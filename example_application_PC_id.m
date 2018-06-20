@@ -7,7 +7,7 @@ load('ENSEMBLE_DATA_new.mat')
 POSITION_SIGNAL=ENSEMBLE_POSITION;
 TORQUE_SIGNAL=ENSEMBLE_TORQUE;
 
-%there are 100 cycles, you need to define how many will be used for ID
+%there are 1000 cycles, you need to define how many will be used for ID
 trials=80;
 
 %sampling rate was 1000Hz
