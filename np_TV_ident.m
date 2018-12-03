@@ -102,11 +102,11 @@ if strcmp(periodic,'yes')
             
         end
         BAS{p}=[];
-    for k=1:size(REG_M{p},2)
-        BAS{p}=[BAS{p} Basis.*repmat(REG_M{p}(:,k),1,n_bas+1)];
-    end   
-    %staking all the matrices together
-    BASIS_USED=[BASIS_USED;BAS{p}];
+        for k=1:size(REG_M{p},2)
+            BAS{p}=[BAS{p} Basis.*repmat(REG_M{p}(:,k),1,n_bas+1)];
+        end   
+        %staking all the matrices together
+        BASIS_USED=[BASIS_USED;BAS{p}];
     end
 elseif strcmp(periodic,'no')
 
@@ -114,23 +114,25 @@ elseif strcmp(periodic,'no')
 
         aux=1;
         for i=negLags:0
-            if p==trials
-                REG_M{p}(:,aux)=[X(-i+1:end,p);zeros(-i,1)];
-            end
+            %if p==trials
+            REG_M{p}(:,aux)=[X(-i+1:end,p);zeros(-i,1)];
+            aux=aux+1;
+            %end
         
         end
         for i=1:posLags
-            if p==1
-                REG_M{p}(:,aux)=[zeros(i,1);X(1:end-i,p)];
-            end
+            %if p==1
+            REG_M{p}(:,aux)=[zeros(i,1);X(1:end-i,p)];
+            aux=aux+1;
+            %end
             
         end
         BAS{p}=[];
-    for k=1:size(REG_M{p},2)
-        BAS{p}=[BAS{p} Basis.*repmat(REG_M{p}(:,k),1,n_bas+1)];
-    end   
-    %staking all the matrices together
-    BASIS_USED=[BASIS_USED;BAS{p}];
+        for k=1:size(REG_M{p},2)
+            BAS{p}=[BAS{p} Basis.*repmat(REG_M{p}(:,k),1,n_bas+1)];
+        end   
+        %staking all the matrices together
+        BASIS_USED=[BASIS_USED;BAS{p}];
     end
 else
     error('''periodic'' can only be ''yes'' or ''no''')
